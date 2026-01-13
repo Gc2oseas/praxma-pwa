@@ -1,7 +1,7 @@
 {
   "name": "PRAXMA",
   "short_name": "PRAXMA",
-  "description": "Explora nuevas perspectivas y mundos en cada capítulo.",
+  "description": "Explora mundos y emociones en cada capítulo.",
   "start_url": "https://PRAXMA.blogspot.com/",
   "display": "standalone",
   "background_color": "#ffffff",
@@ -9,9 +9,16 @@
   "orientation": "portrait",
   "icons": [
     {
-      "src": "https://PRAXMA.blogspot.com/favicon.ico",
-      "sizes": "64x64",
-      "type": "image/x-icon"
+      "src": "https://blogger.googleusercontent.com/img/a/AVvXsEgR5wDiGNXHGAOBV-u0r-JxxRP4xBRqSJL7aq2UHAnF2HOboQHtmuY1A96xquyx5a-BQkC50DVZoOCGZ-9iZol9-N8111S304_4GBH3Y8cRINvGQDtP-0ALjfil7lUHaCqvdnIPr7DAJJsZlArriAZ-kM3sVwAMF8iFPtrCpR4aiXDfCIb5cqd7JywdshE0=s192",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/a/AVvXsEgR5wDiGNXHGAOBV-u0r-JxxRP4xBRqSJL7aq2UHAnF2HOboQHtmuY1A96xquyx5a-BQkC50DVZoOCGZ-9iZol9-N8111S304_4GBH3Y8cRINvGQDtP-0ALjfil7lUHaCqvdnIPr7DAJJsZlArriAZ-kM3sVwAMF8iFPtrCpR4aiXDfCIb5cqd7JywdshE0=s512",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
     }
   ]
 }
