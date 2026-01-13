@@ -1,1 +1,24 @@
-<link href='data:application/manifest+json;base64,ewogICJuYW1lIjogIlBSQVhNQSIsCiAgInNob3J0X25hbWUiOiAiUFJBWE1BIiwKICAic3RhcnRfdXJsIjogImh0dHBzOi8vUFJBWE1BLmJsb2dzcG90LmNvbS8iLAogICJkaXNwbGF5IjogInN0YW5kYWxvbmUiLAogICJiYWNrZ3JvdW5kX2NvbG9yIjogIiNmZmZmZmYiLAogICJ0aGVtZV9jb2xvciI6ICIjMDAwMDAwIiwKICAiaWNvbnMiOiBbCiAgICB7CiAgICAgICJzcmMiOiAiaHR0cHM6Ly9yZXNvdXJjZS11cmwuaWNvbi81MTIucG5nIiwKICAgICAgInNpemVzIjogIjUxMng1MTIiLAogICAgICAidHlwZSI6ICJpbWFnZS9wbmciCiAgICB9CiAgXQp9' rel='manifest'/>
+{
+  "name": "PRAXMA",
+  "short_name": "PRAXMA",
+  "description": "Explora nuevas perspectivas y mundos en cada capítulo.",
+  "start_url": "https://PRAXMA.blogspot.com/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#000000",
+  "orientation": "portrait",
+  "icons": [
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEis_Tu_TU6Vf4Q_mK_k9X4C7G9v-HnL6L7l9A/s512/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "https://blogger.googleusercontent.com/img/b/R29vZ2xl/AVvXsEis_Tu_TU6Vf4Q_mK_k9X4C7G9v-HnL6L7l9A/s512/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "any maskable"
+    }
+  ]
+}
