@@ -1,33 +1,57 @@
-const CACHE_NAME = 'praxma-dynamic-v1';
+const CACHE_NAME = 'praxma-engine-v4';
+const RSS_FEED = 'https://praxma.blogspot.com/feeds/posts/default?alt=rss';
 
-// Recursos esenciales mínimos
-const PRE_CACHE = [
-  '/',
-  'https://PRAXMA.blogspot.com/'
-];
-
-self.addEventListener('install', event => {
-  event.waitUntil(
-    caches.open(CACHE_NAME).then(cache => cache.addAll(PRE_CACHE))
-  );
+self.addEventListener('install', (event) => {
+  self.skipWaiting();
 });
 
-self.addEventListener('fetch', event => {
-  // Solo cacheamos peticiones de tu blog o recursos externos necesarios (fuentes, imágenes)
-  event.respondWith(
-    caches.match(event.request).then(cachedResponse => {
-      if (cachedResponse) return cachedResponse;
+// Función de consulta (el "Ping")
+async function checkForUpdates() {
+  try {
+    const response = await fetch(RSS_FEED);
+    const text = await response.text();
+    
+    // Extraemos la fecha de la última actualización del feed
+    const lastUpdateMatch = text.match(/<updated>(.*?)<\/updated>/);
+    const currentUpdate = lastUpdateMatch ? lastUpdateMatch[1] : '';
 
-      return fetch(event.request).then(response => {
-        // Si la respuesta es válida, la guardamos automáticamente en la caché
-        if (response.status === 200) {
-          return caches.open(CACHE_NAME).then(cache => {
-            cache.put(event.request, response.clone());
-            return response;
-          });
-        }
-        return response;
-      });
-    })
-  );
+    // Comparamos con la guardada en la base de datos local (IndexedDB o Cache)
+    const cache = await caches.open(CACHE_NAME);
+    const lastStoredUpdate = await cache.match('last-update-tag');
+    const lastTagText = lastStoredUpdate ? await lastStoredUpdate.text() : '';
+
+    if (currentUpdate !== lastTagText) {
+      console.log('PRAXMA: ¡Nuevo contenido detectedo! Iniciando descarga...');
+      
+      // Guardamos la nueva marca de tiempo
+      cache.put('last-update-tag', new Response(currentUpdate));
+      
+      // Descargamos los últimos posts
+      const urls = [...text.matchAll(/<link>(.*?)<\/link>/g)]
+                    .map(m => m[1])
+                    .filter(url => url.includes('.html'))
+                    .slice(0, 5);
+      
+      await cache.addAll(urls);
+
+      // Activamos el Badge (punto de notificación)
+      if (navigator.setAppBadge) {
+        navigator.setAppBadge(1);
+      }
+    }
+  } catch (err) {
+    console.error('Error en el ping de consulta:', err);
+  }
+}
+
+// Escuchar el evento de sincronización periódica
+self.addEventListener('periodicsync', (event) => {
+  if (event.tag === 'update-check') {
+    event.waitUntil(checkForUpdates());
+  }
+});
+
+// También revisamos cuando el usuario abre la app
+self.addEventListener('activate', (event) => {
+  event.waitUntil(checkForUpdates());
 });
